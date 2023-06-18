@@ -1,9 +1,10 @@
 const puppeteer = require("puppeteer");
+const argv = require('minimist')(process.argv.slice(2));
 
 (async () => {
-  const CRUZEIRO_SEACHED_URL = "https://estrelabet.com/ptb/bet/search/cruzeiro";
+  const CRUZEIRO_SEACHED_URL = `https://estrelabet.com/ptb/bet/search/${argv.t ?? 'cruzeiro'}`;
 
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: argv.headless ?? true });
   const page = await browser.newPage();
 
   await page.goto(CRUZEIRO_SEACHED_URL);
