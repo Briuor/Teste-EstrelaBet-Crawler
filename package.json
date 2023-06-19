@@ -1,7 +1,16 @@
 {
   "dependencies": {
-    "@nodegui/nodegui": "^0.61.0",
     "minimist": "^1.2.8",
     "puppeteer": "^20.7.2"
+  },
+  "scripts": {
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node build/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.1",
+    "@types/puppeteer": "^7.0.4",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.1.3"
   }
 }
