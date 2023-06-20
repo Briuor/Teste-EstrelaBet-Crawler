@@ -4,7 +4,7 @@
 > **estrelabet-crawler** é uma ferramenta CLI para buscar ods de um dado time na estrelabet.com
 
 <p align="center"> 
-  <img style="border-radius: 5px" src="https://github.com/Briuor/rflowz/blob/master/assets/demo.gif?raw=true">
+  <img style="border-radius: 5px" src="https://github.com/Briuor/estrelabet-crawler/blob/master/assets/demo.gif?raw=true">
 </p>
 
 ## Requisitos
