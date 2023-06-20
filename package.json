@@ -1,6 +1,6 @@
 {
   "name": "estrelabet-crawler",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "dependencies": {
     "cli-table": "^0.3.11",
     "estrelabet-crawler": "^0.0.1",
