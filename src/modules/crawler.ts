@@ -6,10 +6,11 @@ import puppeteer, {
 } from "puppeteer";
 import { ESTRELABET_SEACH_URL, SELECTORS } from "../utils/constants";
 import { League, Match, SELECTORS_TYPE } from "../types/types";
+import { stopExecution } from "../utils/functions";
 
 export default class Crawler {
-  browser: Browser;
-  page: Page;
+  private browser: Browser;
+  private page: Page;
 
   private constructor(browser: Browser, page: Page) {
     this.browser = browser;
@@ -21,17 +22,35 @@ export default class Crawler {
       const browser = await puppeteer.launch(options);
       const page = await browser.newPage();
       await page.setViewport({ width: 1080, height: 1024 });
+
       return new Crawler(browser, page);
     } catch (e) {
-      throw new Error("Erro ao inicializar browser");
+      console.log(e);
+      
+      stopExecution("Erro ao inicializar browser, tente novamente");
+    }
+  }
+
+  private async checkLeaguesNotFound(): Promise<void> {
+    try {
+      const checkTimeout = 3000;
+      await this.page.waitForSelector(SELECTORS.LEAGUES_NOT_FOUND_MESSAGE.$, {
+        timeout: checkTimeout,
+      });
+      stopExecution(`Nehuma partida encontrada no momento`);
+    } catch (e) {
+      /* leagues found */
     }
   }
 
   private async getLeagueContainerElements(): Promise<
     ElementHandle<any>[] | []
   > {
+    this.checkLeaguesNotFound();
+
     await this.page.waitForSelector(SELECTORS.LEAGUE_CONTAINER.$);
     const $leagueElements = await this.page.$$(SELECTORS.LEAGUE_CONTAINER.$);
+
     return $leagueElements;
   }
 
@@ -65,7 +84,6 @@ export default class Crawler {
           const teamElements = matchInfos[matchIndex].querySelectorAll(
             SELECTORS.LEAGUE_CONTAINER.MATCH_INFO_CONTAINERS.MATCH_TEAMS.$
           );
-
           const $time = matchInfos[matchIndex].querySelector(
             SELECTORS.LEAGUE_CONTAINER.MATCH_INFO_CONTAINERS.MATCH_TIME.$
           );
@@ -108,11 +126,11 @@ export default class Crawler {
 
       return leagues;
     } catch (e) {
-      throw new Error("Erro ao extrair dados");
+      stopExecution("Erro ao extrair dados, tente novamente");
     }
   }
 
-  public async close() {
+  async close() {
     await this.browser?.close();
   }
 }

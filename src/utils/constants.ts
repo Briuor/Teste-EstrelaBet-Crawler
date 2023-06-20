@@ -12,6 +12,7 @@ export const SELECTORS = {
       MATCH_TIME: { $: ".date" },
     },
   },
+  LEAGUES_NOT_FOUND_MESSAGE: { $: '[content="MESSAGES.NO_DATA_FOUND"]' },
 };
 
 export const DEFAULT_TEAM_SEARCH = "cruzeiro";

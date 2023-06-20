@@ -1,14 +1,21 @@
 {
+  "name": "estrelabet-crawler",
+  "version": "0.0.1",
   "dependencies": {
     "cli-table": "^0.3.11",
+    "estrelabet-crawler": "^0.0.1",
     "minimist": "^1.2.8",
     "ora": "^5.4.1",
     "puppeteer": "^20.7.2"
+  },
+  "engines": {
+    "node": ">=16"
   },
   "scripts": {
     "build": "rimraf ./build && tsc",
     "start": "npm run build && node build/app.js"
   },
+  "bin": "build/app.js",
   "devDependencies": {
     "@types/node": "^20.3.1",
     "@types/puppeteer": "^7.0.4",
