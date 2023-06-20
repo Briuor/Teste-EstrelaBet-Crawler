@@ -3,6 +3,8 @@
 
 > **estrelabet-crawler** é uma ferramenta CLI para buscar ods de um dado time na [estrelabet.com](https://estrelabet.com)
 
+[![npm version](https://img.shields.io/npm/v/estrelabet-crawler.svg?color=%2378e08f)](https://www.npmjs.com/package/estrelabet-crawler)
+
 ![alt text](https://github.com/Briuor/estrelabet-crawler/blob/main/assets/demo.gif?raw=true)
 
 ## Requisitos
@@ -10,14 +12,7 @@ NodeJS v16+
 
 ## Instalação
 ```sh
-# clone o projeto
-git clone https://github.com/Briuor/estrelabet-crawler.git
-
-# entre no diretório do projeto
-cd estrelabet-crawler/
-
-# instale as dependências
-npm i -g .
+npm i -g estrelabet-crawler
 ```
 
 ## Como usar
@@ -38,7 +33,7 @@ estrelabet-crawler --show
 ```
 
 ## Observação
-Caso **tenha problemas para executar** ou **não queira instalar de forma global** na sua máquina usando ```npm i -g .```, instale e execute da seguinte forma:
+Caso **tenha problemas para executar** ou **não queira instalar de forma global** na sua máquina, instale e execute por este repositório:
 ```sh
 # clone o projeto
 git clone https://github.com/Briuor/estrelabet-crawler.git
