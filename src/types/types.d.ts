@@ -1,8 +1,8 @@
-import { SELECTORS } from "./utils/constants";
+import { SELECTORS } from "../utils/constants";
 
 export interface League {
   name: string;
-  matches: any[];
+  matches: Match[];
 }
 
 export interface Match {

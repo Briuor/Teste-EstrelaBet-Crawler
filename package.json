@@ -1,11 +1,13 @@
 {
   "dependencies": {
+    "cli-table": "^0.3.11",
     "minimist": "^1.2.8",
+    "ora": "^5.4.1",
     "puppeteer": "^20.7.2"
   },
   "scripts": {
     "build": "rimraf ./build && tsc",
-    "start": "npm run build && node build/index.js"
+    "start": "npm run build && node build/app.js"
   },
   "devDependencies": {
     "@types/node": "^20.3.1",

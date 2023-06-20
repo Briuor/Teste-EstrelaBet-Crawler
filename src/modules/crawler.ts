@@ -1,6 +1,11 @@
-import puppeteer, { Browser, ElementHandle, Page, PuppeteerLaunchOptions } from "puppeteer";
-import { ESTRELABET_SEACH_URL, SELECTORS } from "./utils/constants";
-import { League, Match, SELECTORS_TYPE } from "./types";
+import puppeteer, {
+  Browser,
+  ElementHandle,
+  Page,
+  PuppeteerLaunchOptions,
+} from "puppeteer";
+import { ESTRELABET_SEACH_URL, SELECTORS } from "../utils/constants";
+import { League, Match, SELECTORS_TYPE } from "../types/types";
 
 export default class Crawler {
   browser: Browser;
@@ -12,11 +17,14 @@ export default class Crawler {
   }
 
   static async initialize(options: PuppeteerLaunchOptions) {
-    const browser = await puppeteer.launch(options);
-    const page = await browser.newPage();
-    await page.setViewport({ width: 1080, height: 1024 });
-
-    return new Crawler(browser, page);
+    try {
+      const browser = await puppeteer.launch(options);
+      const page = await browser.newPage();
+      await page.setViewport({ width: 1080, height: 1024 });
+      return new Crawler(browser, page);
+    } catch (e) {
+      throw new Error("Erro ao inicializar browser");
+    }
   }
 
   private async getLeagueContainerElements(): Promise<
@@ -79,24 +87,29 @@ export default class Crawler {
 
         return league;
       },
-      SELECTORS,
+      SELECTORS
     );
 
     return league;
   }
 
-  public async searchTeamMatches(team: string): Promise<League[]> {
-    const leagues: League[] = [];
+  async searchTeamMatches(team: string): Promise<League[]> {
+    try {
+      const leagues: League[] = [];
 
-    await this.page.goto(`${ESTRELABET_SEACH_URL}${team}`);
-    const $leagueElements = await this.getLeagueContainerElements();
+      await this.page.goto(`${ESTRELABET_SEACH_URL}${team}`);
 
-    for (let $leagueElement of $leagueElements) {
-      const league = await this.extractLeagueInfos($leagueElement);
-      leagues.push(league);
+      const $leagueElements = await this.getLeagueContainerElements();
+
+      for (let $leagueElement of $leagueElements) {
+        const league = await this.extractLeagueInfos($leagueElement);
+        leagues.push(league);
+      }
+
+      return leagues;
+    } catch (e) {
+      throw new Error("Erro ao extrair dados");
     }
-
-    return leagues;
   }
 
   public async close() {
