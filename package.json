@@ -1,6 +1,8 @@
 {
   "name": "estrelabet-crawler",
-  "version": "0.0.5",
+  "version": "0.0.6",
+  "license": "MIT",
+  "repository": "Briuor/estrelabet-crawler",
   "dependencies": {
     "cli-table": "^0.3.11",
     "minimist": "^1.2.8",
